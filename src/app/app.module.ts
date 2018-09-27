@@ -18,6 +18,12 @@ import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { PERSONAS_COMPONENTS } from './personas/personas.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PersonasViewModelService, PersonasViewModelDAOService } from './personas/personas.service';
+import { MenuComponent } from './menu/menu.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { BLOG_COMPONENTS } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -27,15 +33,20 @@ import { HttpClientModule } from '@angular/common/http';
     NotificationComponent,
     DinamicoComponent,
     CalculadoraComponent,
-    PERSONAS_COMPONENTS
+    PERSONAS_COMPONENTS,
+    BLOG_COMPONENTS,
+    MenuComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
+    RouterModule.forRoot(routes),
     IndraCoreModule, FacturacionModule,
   ],
   providers: [
     LoggerService,
     {provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL},
+    {provide: PersonasViewModelService, useClass: PersonasViewModelDAOService},
   ],
   bootstrap: [AppComponent]
 })
