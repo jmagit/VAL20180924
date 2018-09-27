@@ -1,0 +1,67 @@
+<table>
+  <tr>
+    <td><calculadora (updated)="ponResultado('UNO', $event)"></calculadora></td>
+    <td >
+      <table border="1">
+        <tr><th>Nº</th><th>Calc</th><th>Resultado</th></tr>
+        <tr  *ngFor="let r of resultados | slice:-5">
+          <td class="text-right">{{r.pos}}</td>
+          <td>{{r.origen}}</td>
+          <!-- <td class="text-right">{{r.valor | number:'1.0-8' }}</td> -->
+          <td class="text-right">{{r.valor | localnumber:idioma:'1.0-8' }}</td>
+        </tr>
+        <tr>
+          <td colspan="3">Idioma: <select [(ngModel)]="idioma" >
+            <option *ngFor="let p of idiomas" [value]="p.codigo">{{p.region}}</option>
+          </select>
+        </td>
+        </tr>
+      </table>
+    </td>
+    <td><calculadora [init]="valCalculadora" (updated)="ponResultado('DOS', $event)"></calculadora></td>
+  </tr>
+</table>
+<input type="number" [(ngModel)] = "valCalculadora">
+
+<h1>Hola {{Nombre | elipsis:10 | uppercase}}</h1>
+<p>
+  <input type="text" [(ngModel)]="Nombre">
+  <input type="button" value="saluda" (click)="saluda()">
+  <input type="button" value="despide" (click)="despide()">
+  <input type="button" value="di algo" (click)="di('algo')">
+  <input type="button" value="notify" (click)="notify.add('Notificación de demo')">
+  <input type="button" value="cambia" (click)="cambia()">
+</p>
+<p [textContent]="resutado">Esto se pierde</p>
+<p [innerHTML]="resutado">Esto se pierde</p>
+
+<p [hidden]="!visible">Ahora me ves</p>
+<p *ngIf="visible">Ahora existo</p>
+
+<p [ngClass]="estetica">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem aspernatur fuga, magni numquam libero tenetur hic est itaque? Minima assumenda deserunt quisquam! Tenetur vitae dicta minus libero quas ad nam!
+</p>
+<p [class.invisible]="!visible">Clase invisible</p>
+<p>
+  Calcula: 2 + 2 = {{2+2}} = {{calcula(2,2)| currency:'EUR':'symbol':'1.2-2'}}
+</p>
+<ul>
+  <li *ngFor="let item of listado | slice:-5; let ind=index; let fondo=odd;"
+    [style.background-color]="fondo ? 'LightBlue' : 'Lavender'">
+    {{item.nombre | titlecase}} ({{item.id}}) Elemento {{ind + 1}} de {{listado.length}}
+    </li>
+</ul>
+<p>
+  <select [(ngModel)]="idProvincia" >
+    <option value="">--Elige opción--</option>
+    <option *ngFor="let p of listado" [value]="p.id">{{p.nombre}}</option>
+  </select>
+  Selecionada: {{idProvincia}}
+  <input type="text" value="Alicante" #txtProvinca>
+  <input type="button" value="Añadir" (click)="add(txtProvinca.value)">
+</p>
+{{listado | json}}
+<indra-sizer [(size)]="fontsize"></indra-sizer>
+<p [style.font-size.px]="fontsize">
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint earum dolorum sed quam possimus blanditiis quasi fugiat est qui dicta? Nesciunt ratione dolorem ipsa nulla tempore quae reprehenderit, dignissimos ea?
+</p>

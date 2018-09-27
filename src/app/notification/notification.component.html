@@ -1,0 +1,11 @@
+<div class="notificaciones" *ngIf="VM.Listado.length > 0">
+  <ul>
+    <li *ngFor="let item of VM.Listado; let i = index" >
+      {{item}}
+      <input type="button" value="X" (click)="VM.remove(i)">
+    </li>
+  </ul>
+  <div>
+    <input type="button" value="Cerrar" (click)="VM.clear()">
+  </div>
+</div>
